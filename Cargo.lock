@@ -515,6 +515,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "diesel-derive-enum"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "703e71c268ea2d8da9c0ab0b40d8b217179ee622209c170875d24443193a0dfb"
+dependencies = [
+ "heck",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "diesel_derives"
 version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1259,8 +1271,12 @@ version = "0.1.0"
 dependencies = [
  "actix-web",
  "diesel",
+ "diesel-derive-enum",
  "dotenv",
  "env_logger",
+ "log",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

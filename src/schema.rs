@@ -1,32 +1,35 @@
 table! {
-    ingredient (id) {
-        id -> Int4,
-        name -> Varchar,
-    }
-}
+    use diesel::sql_types::*;
+    use crate::unit::*;
 
-table! {
-    ingredient_list (id) {
+    ingredient_lists (id) {
         id -> Int4,
         recipe_id -> Int4,
-        ingredient -> Int4,
+        ingredient_id -> Int4,
         quantity -> Float4,
-        unit -> Unit,
+        unit -> UnitMapping,
     }
 }
 
 table! {
-    recipe (id) {
+    use diesel::sql_types::*;
+
+    ingredients (id) {
         id -> Int4,
         name -> Varchar,
     }
 }
 
-joinable!(ingredient_list -> ingredient (ingredient));
-joinable!(ingredient_list -> recipe (recipe_id));
+table! {
+    use diesel::sql_types::*;
 
-allow_tables_to_appear_in_same_query!(
-    ingredient,
-    ingredient_list,
-    recipe,
-);
+    recipes (id) {
+        id -> Int4,
+        name -> Varchar,
+    }
+}
+
+joinable!(ingredient_lists -> ingredients (ingredient_id));
+joinable!(ingredient_lists -> recipes (recipe_id));
+
+allow_tables_to_appear_in_same_query!(ingredient_lists, ingredients, recipes,);
